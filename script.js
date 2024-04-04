@@ -1,41 +1,86 @@
-function createTask() {
-    // Code for creating a new task
-}
-
-function editTask(taskId) {
-    // Code for editing a task
-}
-
-function deleteTask(taskId) {
-    // Code for deleting a task
-}
-
-// Sample tasks (You can replace this with dynamic data)
-const tasks = [
-    { id: 1, title: "Task 1", status: "pending" },
-    { id: 2, title: "Task 2", status: "in-progress" },
-    { id: 3, title: "Task 3", status: "completed" }
+// Sample tasks data
+let tasks = [
+    { name: "Create Landing Page", status: "created" },
+    { name: "Update About us ", status: "inProgress" },
+    { name: "Finish login and signup", status: "completed" }
 ];
 
-// Render tasks
-const taskList = document.getElementById('task-list');
-tasks.forEach(task => {
-    const li = document.createElement('li');
-    li.textContent = task.title;
-    li.classList.add(task.status);
-    const editBtn = document.createElement('button');
-    editBtn.textContent = 'Edit';
-    editBtn.classList.add('btn', 'btn-edit');
-    editBtn.onclick = function() {
-        editTask(task.id);
-    };
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.classList.add('btn', 'btn-delete');
-    deleteBtn.onclick = function() {
-        deleteTask(task.id);
-    };
-    li.appendChild(editBtn);
-    li.appendChild(deleteBtn);
-    taskList.appendChild(li);
-});
+// Function to render tasks based on their status
+function renderTasks() {
+    const createdTasksList = document.getElementById("createdTaskList");
+    createdTasksList.innerHTML = "";
+
+    tasks.filter(task => task.status === "created").forEach(task => {
+        const li = document.createElement("li");
+        li.textContent = task.name;
+
+        const editIcon = document.createElement("i");
+        editIcon.classList.add("fas", "fa-edit", "edit-icon");
+        editIcon.setAttribute("title", "Edit Task");
+        editIcon.addEventListener("click", () => displayEditTaskMenu(task.id));
+
+        const deleteIcon = document.createElement("i");
+        deleteIcon.classList.add("fas", "fa-trash-alt", "delete-icon");
+        deleteIcon.setAttribute("title", "Delete Task");
+        deleteIcon.addEventListener("click", () => deleteTask(task.id));
+
+        li.appendChild(editIcon);
+        li.appendChild(deleteIcon);
+
+        createdTasksList.appendChild(li);
+    });
+}
+
+// Function to create a new task
+function createTask() {
+    const taskName = prompt("Enter task name:");
+    if (taskName) {
+        const newTask = {
+            id: tasks.length + 1,
+            name: taskName,
+            status: "created"
+        };
+        tasks.push(newTask);
+        renderTasks();
+    }
+}
+
+// Function to display the edit task menu
+function displayEditTaskMenu(taskId) {
+    const editTaskMenu = document.getElementById("editTaskMenu");
+    const saveEditTaskButton = document.getElementById("saveEditTaskButton");
+    saveEditTaskButton.dataset.taskId = taskId;
+    editTaskMenu.style.display = "block";
+}
+
+// Function to cancel editing a task
+function cancelEditTask() {
+    const editTaskMenu = document.getElementById("editTaskMenu");
+    editTaskMenu.style.display = "none";
+}
+
+// Function to save the edited task
+function saveEditedTask() {
+    const taskId = parseInt(document.getElementById("saveEditTaskButton").dataset.taskId);
+    const newTaskName = prompt("Enter the new task name:");
+    if (newTaskName) {
+        const taskIndex = tasks.findIndex(task => task.id === taskId);
+        if (taskIndex !== -1) {
+            tasks[taskIndex].name = newTaskName;
+            renderTasks();
+        }
+    }
+    cancelEditTask();
+}
+
+// Function to delete a task
+function deleteTask(taskId) {
+    const taskIndex = tasks.findIndex(task => task.id === taskId);
+    if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1);
+        renderTasks();
+    }
+}
+
+// Initial rendering
+renderTasks();
