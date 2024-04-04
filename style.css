@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+h1 {
+    text-align: center;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.pending {
+    background-color: #ffcccb; /* Light red */
+}
+.in-progress {
+    background-color: #ffff99; /* Light yellow */
+}
+.completed {
+    background-color: #90ee90; /* Light green */
+}
+.btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.btn-create {
+    background-color: #4caf50; /* Green */
+    color: white;
+}
+.btn-edit {
+    background-color: #008CBA; /* Blue */
+    color: white;
+}
+.btn-delete {
+    background-color: #f44336; /* Red */
+    color: white;
+}
