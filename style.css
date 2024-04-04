@@ -17,7 +17,7 @@ li {
     border-radius: 5px;
 }
 .pending {
-    background-color: #ffcccb; /* Light red */
+    background-color: #ffcccb; /* Light red*/
 }
 .in-progress {
     background-color: #ffff99; /* Light yellow */
