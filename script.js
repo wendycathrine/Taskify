@@ -1,33 +1,62 @@
 // Sample tasks data
 let tasks = [
+    { name: "Create Login Page", status: "created" },
+    { name: "Create About Us Page", status: "created" },
     { name: "Create Landing Page", status: "created" },
-    { name: "Update About us ", status: "inProgress" },
-    { name: "Finish login and signup", status: "completed" }
+    { name: "Format forms ", status: "created" },
+    { name: "Set up database", status: "inProgress" },
+    { name: "Upload Website Assets", status: "inProgress" },
+    { name: "Create Sign-UP and login form", status: "completed" },
+    { name: "Final figma mock up", status: "completed" },
 ];
+
+// Function to render tasks based on their status
+// function renderTasks() {
+//     const createdTasksList = document.getElementById("createdTaskList");
+//     const inProgressTasksList = document.getElementById("inProgressTaskList");
+//     const completedTasksList = document.getElementById("completedTaskList");
+
+//     createdTasksList.innerHTML = "";
+//     inProgressTasksList.innerHTML = "";
+//     completedTasksList.innerHTML = "";
+
+//     tasks.forEach(task => {
+//         const li = document.createElement("li");
+//         li.textContent = `${task.name}`;
+        
+//         if (task.status === "created") {
+//             createdTasksList.appendChild(li);
+//         } else if (task.status === "inProgress") {
+//             inProgressTasksList.appendChild(li);
+//         } else if (task.status === "completed") {
+//             li.classList.add("completed");
+//             completedTasksList.appendChild(li);
+//         }
+//     });
+// }
 
 // Function to render tasks based on their status
 function renderTasks() {
     const createdTasksList = document.getElementById("createdTaskList");
+    const inProgressTasksList = document.getElementById("inProgressTaskList");
+    const completedTasksList = document.getElementById("completedTaskList");
+
     createdTasksList.innerHTML = "";
+    inProgressTasksList.innerHTML = "";
+    completedTasksList.innerHTML = "";
 
-    tasks.filter(task => task.status === "created").forEach(task => {
+    tasks.forEach((task, index) => {
         const li = document.createElement("li");
-        li.textContent = task.name;
+        li.textContent = `${index}: ${task.name}`; // Display index along with task name
 
-        const editIcon = document.createElement("i");
-        editIcon.classList.add("fas", "fa-edit", "edit-icon");
-        editIcon.setAttribute("title", "Edit Task");
-        editIcon.addEventListener("click", () => displayEditTaskMenu(task.id));
-
-        const deleteIcon = document.createElement("i");
-        deleteIcon.classList.add("fas", "fa-trash-alt", "delete-icon");
-        deleteIcon.setAttribute("title", "Delete Task");
-        deleteIcon.addEventListener("click", () => deleteTask(task.id));
-
-        li.appendChild(editIcon);
-        li.appendChild(deleteIcon);
-
-        createdTasksList.appendChild(li);
+        if (task.status === "created") {
+            createdTasksList.appendChild(li);
+        } else if (task.status === "inProgress") {
+            inProgressTasksList.appendChild(li);
+        } else if (task.status === "completed") {
+            li.classList.add("completed");
+            completedTasksList.appendChild(li);
+        }
     });
 }
 
@@ -35,48 +64,25 @@ function renderTasks() {
 function createTask() {
     const taskName = prompt("Enter task name:");
     if (taskName) {
-        const newTask = {
-            id: tasks.length + 1,
-            name: taskName,
-            status: "created"
-        };
-        tasks.push(newTask);
+        tasks.push({ name: taskName, status: "created" });
         renderTasks();
     }
 }
 
-// Function to display the edit task menu
-function displayEditTaskMenu(taskId) {
-    const editTaskMenu = document.getElementById("editTaskMenu");
-    const saveEditTaskButton = document.getElementById("saveEditTaskButton");
-    saveEditTaskButton.dataset.taskId = taskId;
-    editTaskMenu.style.display = "block";
-}
-
-// Function to cancel editing a task
-function cancelEditTask() {
-    const editTaskMenu = document.getElementById("editTaskMenu");
-    editTaskMenu.style.display = "none";
-}
-
-// Function to save the edited task
-function saveEditedTask() {
-    const taskId = parseInt(document.getElementById("saveEditTaskButton").dataset.taskId);
+// Function to edit a task
+function editTask() {
+    const taskIndex = prompt("Enter the Number of the task to edit:");
     const newTaskName = prompt("Enter the new task name:");
-    if (newTaskName) {
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
-        if (taskIndex !== -1) {
-            tasks[taskIndex].name = newTaskName;
-            renderTasks();
-        }
+    if (taskIndex && newTaskName && tasks[taskIndex]) {
+        tasks[taskIndex].name = newTaskName;
+        renderTasks();
     }
-    cancelEditTask();
 }
 
 // Function to delete a task
-function deleteTask(taskId) {
-    const taskIndex = tasks.findIndex(task => task.id === taskId);
-    if (taskIndex !== -1) {
+function deleteTask() {
+    const taskIndex = prompt("Enter the index of the task to delete:");
+    if (taskIndex && tasks[taskIndex]) {
         tasks.splice(taskIndex, 1);
         renderTasks();
     }
