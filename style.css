@@ -40,19 +40,36 @@ nav ul li a {
 
 main {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
-/* Contact Form Styles */
-#contact-form {
+/* Contact Content Styles */
+#contact-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact-text {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#contact-form h2 {
+.contact-text h2 {
+    margin-bottom: 10px;
+}
+
+.contact-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
     margin-bottom: 20px;
-    color: #333;
 }
 
 .form-group {
@@ -66,8 +83,9 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="tel"],
 textarea {
-    width: 100%;
+    width: calc(100% - 22px); /* Adjusted for padding */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -76,6 +94,10 @@ textarea {
 
 textarea {
     resize: vertical;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
 }
 
 button[type="submit"] {
