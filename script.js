@@ -81,7 +81,7 @@ function editTask() {
 
 // Function to delete a task
 function deleteTask() {
-    const taskIndex = prompt("Enter the index of the task to delete:");
+    const taskIndex = prompt("Enter the number of the task to delete:");
     if (taskIndex && tasks[taskIndex]) {
         tasks.splice(taskIndex, 1);
         renderTasks();
