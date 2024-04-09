@@ -1,9 +1,17 @@
 
 /*===== LOGIN SHOW and HIDDEN =====*/
-const signUp = document.getElementById('sign-up'),
-    signIn = document.getElementById('sign-in'),
-    loginIn = document.getElementById('login-in'),
+const signUp = document.getElementById('sign-up')
+    signIn = document.getElementById('sign-in')
+    loginIn = document.getElementById('login-in')
+    forgot_pswd = document.getElementById('forgot_pswd')
+    forgot = document.getElementById('forgot')
     loginUp = document.getElementById('login-up')
+
+    back_to_login = document.querySelector('.back_to_login')
+    back_to_signUp = document.querySelector('.back_to_signup')
+    var reset_btn = document. getElementById('reset_btn');
+ 
+    
 
 
 signUp.addEventListener('click', ()=>{
@@ -25,6 +33,8 @@ signIn.addEventListener('click', ()=>{
     loginIn.classList.toggle('block')
     loginUp.classList.toggle('none')
 })
+
+
 
 //show password - login page
 
@@ -57,6 +67,7 @@ checkbox_signup.addEventListener('change',(event)=>{
         password_2.setAttribute('type','password')
     }
 })
+
 // login validation
 const login__button =document.querySelector('.login__button');
 const loginInputs =document.querySelectorAll('.loginInput');
@@ -164,6 +175,36 @@ password_2.addEventListener('keyup', (e) => {
     document.querySelector('.password_confirmation_error').innerHTML = ''
   }
 })
+
+forgot.style.visibility = 'hidden';
+//displaying forgot password form
+
+forgot_psw.addEventListener('click', ()=>{
+  forgot.style.visibility = 'visible';
+  loginIn.style.visibility = 'hidden';
+  loginUp.style.visibility = 'hidden';
+})
+//  return to login page
+
+back_to_login.addEventListener('click', ()=>{
+  forgot.style.visibility = 'hidden';
+  loginIn.style.visibility = 'visible';
+  loginUp.style.visibility = 'visible';
+})
+// retturn to sign up page
+
+back_to_signUp.addEventListener('click', ()=>{
+  forgot.style.visibility = 'hidden';
+  loginIn.style.visibility = 'hidden';
+  loginUp.style.visibility = 'visible';
+})
+
+// disable reset
+reset_btn.addEventListener('click', function(e) {
+  e.preventDefault();
+ 
+})
+ 
 
 
 

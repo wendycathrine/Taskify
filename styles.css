@@ -4,16 +4,18 @@
 /*===== VARIABLES CSS =====*/
 :root{
   /*===== Colores =====*/
-  --first-color: #9D4BFF;
+  --first-color: #F2B807;
   --first-color-dark: #23004D;
-  --first-color-light: #A49EAC;
-  --first-color-lighten: #F2F2F2;
+  --first-color-light:#978F8F;
+  --first-color-lighten:rgba(129, 167, 217, 0.3);
+  ;
+  
 
   /*===== Font and typography =====*/
   --body-font: 'Open Sans', sans-serif;
   --h1-font-size: 1.5rem;
-  --normal-font-size: .938rem;
-  --small-font-size: .813rem;
+  --normal-font-size: .838rem;
+  --small-font-size: .713rem;
 }
 
 @media screen and (min-width: 768px){
@@ -31,13 +33,28 @@
 body{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
   color: var(--first-color-dark);
+  
+  background-color: var(--first-color-light);
+  background-image: url("/assets/img/bg.jpeg");
 }
 
-h1{
-  margin: 0;
+h1,h3,h5, .email{
+  
+  color: whitesmoke;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.reset{
+  text-align: center;
+}
+.password_confirm{
+  margin-top: 10px;
 }
 
 a{
@@ -49,7 +66,9 @@ img{
   height: auto;
   display: block;
 }
-
+.show_password_box, .psw{
+  padding-top: 5px;
+}
 /*===== LOGIN =====*/
 .login{
   display: grid;
@@ -71,27 +90,64 @@ img{
   justify-self: center;
 }
 
-.login__img img{
+/* .login__img img{
   width: 310px;
   margin-top: 1.5rem;
-}
+} */
 
 .login__forms{
   position: relative;
-  height: 368px;
+  height: 600px;
+}
+#reset_btn:hover{
+  cursor:pointer;
+  color: aqua;
+}
+#reset_btn{
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  background-color: #05C7F2;
+  color: #FFF;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+.password_label, .username_label, .password_confirm, .show_psw, .show_password_box{
+  color: whitesmoke;
+  margin-top: 5rem;
+  margin: 0px 80px;
+  
 }
 
-.login__registre, .login__create{
+/* #show_password{
+  margin: 0px 80px;
+} */
+.show_forgot{
+  display: flex;
+  margin-right: 80px;
+}
+/* .show_psw{
+  margin-left: 80px;
+  gap: 0px;
+} */
+
+/* #show_password_signup{
+  margin: 0px 8px;
+} */
+.login__registre, .login__create, .forgot_create{
+  margin-left:10px;
   position: absolute;
   bottom: 1rem;
+  top: 1rem;
   width: 100%;
   background-color: var(--first-color-lighten);
-  padding: 2rem 1rem;
   border-radius: 1rem;
+  height: 95vh;
   /* text-align: center; */
   box-shadow: 0 8px 20px rgba(35,0,77,.2);
-  animation-duration: .4s;
-  animation-name: animate-login;
+  
 }
 
 @keyframes animate-login{
@@ -114,11 +170,12 @@ img{
 
 .login__box{
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: max-content 1fr ;
   column-gap: .5rem;
   padding: 1.125rem 1rem;
+  margin: 0px 80px;
   background-color: #FFF;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   border-radius: .5rem;
 }
 
@@ -131,7 +188,7 @@ img{
   border: none;
   outline: none;
   font-size: var(--normal-font-size);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--first-color-dark);
 }
 
@@ -149,18 +206,19 @@ img{
   font-size: var(--small-font-size);
   font-weight: 600;
   color: var(--first-color-light);
+
 }
 
 .login__button{
-  display: block;
-  padding: 1rem;
-  margin: 2rem 0;
-  background-color: var(--first-color);
+  display: inline-block;
+  padding: 1rem 2rem;
+  margin: 1rem 0;
+  background-color: #05C7F2;
   color: #FFF;
+  margin-left: 20rem;
   font-weight: 600;
   text-align: center;
   border-radius: .5rem;
-  transition: .3s;
 }
 
 .login__button:hover{
@@ -173,11 +231,11 @@ img{
 }
 
 .login__account{
-  color: var(--first-color-dark);
+  color: whitesmoke;
 
 }
 
-.login__signin, .login__signup{
+.login__signin, .login__signup, .login__forgot, .back_to_login{
   color: var(--first-color);
   cursor: pointer;
 }
@@ -204,16 +262,36 @@ img{
 
 .validation-error{
   border: crimson 1px solid;
+  
 }
 .error{
   color: crimson;
+  margin: 0px 80px;
 }
+
+
+
+/* forgot password */
+  
+
+
+@media screen and (max-width: 320px) {
+  .row {
+    padding-left: 1em;
+    padding-right: 1em; }
+    .row h1 {
+      font-size: 1.5em !important; } }
+@media screen and (min-width: 900px) {
+  .row {
+    width: 50%; } }
+
 
 /* ===== MEDIA QUERIES =====*/
 @media screen and (min-width: 576px){
   .login__forms{
-    width: 348px;
+    width: 800px;
     justify-self: center;
+    /* margin-right: 20rem; */
   }
 }
 
@@ -223,39 +301,42 @@ img{
     overflow: hidden;
   }
 
+
   .login__content{
     grid-template-columns: repeat(2, max-content);
     justify-content: center;
     align-items: center;
-    margin-left: 10rem;
+    /* margin-left: 10rem; */
+   
   }
 
-  .login__img{
+   /* .login__img{
     display: flex;
     width: 600px;
     height: 588px;
-    /* background-color: var(--first-color-lighten); */
-    background-image: url("/login_signUp/assets/img/bg.jpg");
+    background-color: var(--first-color-lighten); 
+    background-image: url("/assets/img/bg.jpg"); 
     background-position: center;
     background-size: cover;
     border-radius: 1rem;
     padding-left: 1rem;
-  }
+  }  
 
-  .login__img img{
+   .login__img img{
     width: 390px;
     margin-top: 0;
-  }
+  } 
 
-  .login__registre, .login__create{
+   .login__registre, .login__create{
     left: -11rem;
-  }
+  } 
 
-  .login__registre{
-    bottom: -2rem;
-  }
+   .login__registre{
+    bottom: -2rem; 
+   }
 
   .login__create{
     bottom: -5.5rem;
-  }
-}
+  } */
+
+} 
